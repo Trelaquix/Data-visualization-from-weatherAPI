@@ -15,7 +15,7 @@ import { Component, Input } from '@angular/core';
       </div>
     `,
   })
-  export class RelativeHumidityComponent {
+  export class RelativeHumidityChartComponent {
     @Input() barChartData: any[] = [];
     @Input() barChartLabels: string[] = [];
     @Input() barChartOptions: any = {};
