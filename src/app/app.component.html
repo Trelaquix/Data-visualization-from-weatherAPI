@@ -300,15 +300,57 @@
       visibility: hidden;
     }
   }
+
+  .center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-container {
+  max-height: calc(100vh - 100px); /* Adjust 100px to match your header height */
+}
+
+relative-humidity-chart {
+  height: 100%;
+  width: 100%;
+}
+
 </style>
 
-  <div class="container">
-    <h2>Relative Humidity Chart</h2>
-    <relative-humidity-chart
-      [barChartData]="humidityData"
-      [barChartLabels]="humidityLabels"
-      [barChartOptions]="humidityOptions"
-    ></relative-humidity-chart>
-  </div>
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+  <h2 class="center-content">Weather Charts</h2>
+  
+  <mat-tab-group>
+    <mat-tab label="Relative Humidity">
+      <div class="chart-container">
+        <relative-humidity-chart
+        *ngIf="selectedTab === 'humidity'"
+        [barChartData]="humidityData"
+        [barChartLabels]="humidityLabels"
+        [barChartOptions]="humidityOptions"
+      ></relative-humidity-chart>
+      </div>
+    </mat-tab>
+    <mat-tab label="Temperature">
+      <!-- <temperature-chart
+        *ngIf="selectedTab === 'temperature'"
+        [lineChartData]="temperatureData"
+        [lineChartLabels]="temperatureLabels"
+        [lineChartOptions]="temperatureOptions"
+      ></temperature-chart> -->
+    </mat-tab>
+    <mat-tab label="Precipitation">
+      <!-- <precipitation-chart
+        *ngIf="selectedTab === 'precipitation'"
+        [lineChartData]="precipitationData"
+        [lineChartLabels]="precipitationLabels"
+        [lineChartOptions]="precipitationOptions"
+      ></precipitation-chart> -->
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
 
 <router-outlet></router-outlet>

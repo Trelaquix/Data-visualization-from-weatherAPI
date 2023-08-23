@@ -3,19 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgChartsModule } from 'ng2-charts';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RelativeHumidityComponent } from './components/relative-humidity.component';
+import { RelativeHumidityChartComponent } from './components/relative-humidity-chart.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTabsModule } from '@angular/material/tabs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    RelativeHumidityComponent
+    RelativeHumidityChartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTabsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

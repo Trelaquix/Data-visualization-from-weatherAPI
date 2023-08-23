@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RelativeHumidityComponent } from './components/relative-humidity.component';
+import { RelativeHumidityChartComponent } from './components/relative-humidity-chart.component';
 import { WeatherService } from './service/weather.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { WeatherService } from './service/weather.service';
 })
 export class AppComponent {
   title = 'weatherAPI';
+  selectedTab: string = 'humidity'; // Default tab
+
   humidityData = [{ data: [], label: 'Relative Humidity (%)' }]; // Declare the humidityData property as an array
   humidityLabels = []; // Declare the humidityLabels property as an array
   humidityOptions = {
@@ -18,8 +20,17 @@ export class AppComponent {
       y: { ticks: { beginAtZero: true, max: 100 } }, // Use an object instead of an array
     },
   };
-  
+
+  temperatureData = []; // Define temperature data
+  temperatureLabels = []; // Define temperature labels
+  temperatureOptions = {}; // Define temperature options
+
+  precipitationData = []; // Define precipitation data
+  precipitationLabels = []; // Define precipitation labels
+  precipitationOptions = {}; // Define precipitation options
+
   constructor(private weatherService: WeatherService) {}
+
   ngOnInit(): void {
     const latitude = 1.29;
     const longitude = 103.85;
