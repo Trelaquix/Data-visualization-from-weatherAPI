@@ -7,7 +7,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None // For disabling @angular/material/tabs auto styling to applying custom highlighting style
 })
 export class AppComponent {
   title = 'weatherAPI';
@@ -58,13 +58,13 @@ export class AppComponent {
     
     switch (selectedTabLabel) {
       case 'Relative Humidity':
-        this.selectedTab = 'relativeHumidity';
+        this.selectedTab = 'relativeHumidity'; // Switch to Relative Humidity tab
         break;
       case 'Temperature':
-        this.selectedTab = 'temperature';
+        this.selectedTab = 'temperature'; // Switch to Temperature tab
         break;
       case 'Direct Radiation':
-        this.selectedTab = 'directRadiation';
+        this.selectedTab = 'directRadiation'; // Switch to Direct Radiation tab
         break;
       default:
         this.selectedTab = 'relativeHumidity'; // Default is set to 'relativeHumidity tab'
@@ -78,6 +78,7 @@ export class AppComponent {
   relativeHumidityLabels = []; // Declare relativeHumidityLabels property
   relativeHumidityOptions = { // Declare relative humidity options for responsive design
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       x: { grid: { display: false } },
       y: { ticks: { beginAtZero: true, max: 100 } },
@@ -100,6 +101,7 @@ export class AppComponent {
   temperatureLabels = []; // Declare temperatureLabels property
   temperatureOptions = { // Declare temperature options for responsive design
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       x: { grid: { display: false } },
       y: { ticks: { beginAtZero: true, max: 100 } },
@@ -118,11 +120,20 @@ export class AppComponent {
     }
   };
 
-  directRadiationData = [{ data: [], label: 'Direct Radiation (W/m²)' }]; // Declare directRadiationData property
+  directRadiationData = [{ // Declare directRadiationData property and fill the area under the chart
+    data: [],
+    label: 'Direct Radiation (W/m²)',
+    fill: true,
+    tension: 0.5,
+    borderColor: 'black',
+    backgroundColor: 'rgba(255,0,0,0.3)' 
+  }];
   directRadiationLabels = []; // Declare directRadiationLabels property
   directRadiationOptions = { // Declare direct radiation options for responsive design
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
+        maintainAspectRatio: false,
       x: { grid: { display: false } },
       y: { ticks: { beginAtZero: true, max: 100 } },
     },
@@ -135,12 +146,15 @@ export class AppComponent {
         position: 'top'
       },
       fill: {
-        alpha: 100
+        alpha: 1,
+        fillcolor: 'blue',
+        fill: true
       }
     }
   };
 
   ngOnInit(): void {
+    // Parameters for api call for potential future enhancements to allow users to select the location and time period
     const latitude = 1.29;
     const longitude = 103.85;
     const startDate = '2023-01-01';
